@@ -1,1 +1,3 @@
-console.log('Your code goes here..');
+var favoriteActivies;
+favoriteActivies = ['Pernille'];
+console.log(favoriteActivies);
