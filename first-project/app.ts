@@ -1,17 +1,26 @@
-const add = (n1: number, n2: number) => {
-  return n1 + n2;
-};
+interface Greetable {
+  name: string;
 
-const printResult = (num: string) => {
-  return num;
-};
+  greet(phrase: string): void;
+}
 
-let functionTesting: (a: number, b: number) => number;
+class Person implements Greetable {
+  name: string;
+  age = 30;
 
-functionTesting = add;
+  constructor(n: string) {
+    this.name = n;
+  }
 
-const error = (message: string) => {
-  throw message;
-};
+  greet(phrase: string) {
+    console.log(phrase);
+  }
+}
 
-console.log(error('Ifana-Ibaga-o'));
+let user1: Greetable;
+
+user1 = new Person('Elvis');
+user1.name = 'john';
+
+user1.greet('elvis');
+console.log(user1);

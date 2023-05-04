@@ -1,12 +1,15 @@
-var add = function (n1, n2) {
-    return n1 + n2;
-};
-var printResult = function (num) {
-    return num;
-};
-var functionTesting;
-functionTesting = add;
-var error = function (message) {
-    throw message;
-};
-console.log(error('Ifana-Ibaga-o'));
+"use strict";
+class Person {
+    constructor(n) {
+        this.age = 30;
+        this.name = n;
+    }
+    greet(phrase) {
+        console.log(phrase);
+    }
+}
+let user1;
+user1 = new Person('Elvis');
+user1.name = 'john';
+user1.greet('elvis');
+console.log(user1);
