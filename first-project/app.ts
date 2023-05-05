@@ -1,26 +1,88 @@
-interface Greetable {
+type NewYork = {
   name: string;
+  precinct: string;
+};
 
-  greet(phrase: string): void;
+type Florida = {
+  name: string;
+  population: string;
+  date: Date;
+};
+
+type UnitedStates = NewYork & Florida;
+
+const country: UnitedStates = {
+  name: 'Beautiful country',
+  precinct: 'Manhanttan',
+  population: '300,000,000',
+  date: new Date(),
+};
+
+type Combinable = string | number;
+type Combinable2 = number | boolean;
+
+type AllCombinable = Combinable & Combinable2;
+
+const add = (a: Combinable, b: Combinable2) => {
+  if (typeof a === 'string' || typeof b === 'string') {
+    return a.toString() + b.toString();
+  }
+};
+
+class Car {
+  drive() {
+    console.log('Driving a Car');
+  }
 }
 
-class Person implements Greetable {
-  name: string;
-  age = 30;
-
-  constructor(n: string) {
-    this.name = n;
+class Truck {
+  drive() {
+    console.log('Driving a Truck');
   }
 
-  greet(phrase: string) {
-    console.log(phrase);
+  loadCargo(amount: number) {
+    console.log('Loading cargo...' + amount);
   }
 }
 
-let user1: Greetable;
+type Vehicle = Car | Truck;
 
-user1 = new Person('Elvis');
-user1.name = 'john';
+const v1 = new Car();
+const v2 = new Truck();
 
-user1.greet('elvis');
-console.log(user1);
+const useVehicle = (vehicle: Vehicle) => {
+  vehicle.drive();
+  if ('loadCargo' in vehicle) {
+    vehicle.loadCargo(1000);
+  }
+};
+
+useVehicle(v1);
+useVehicle(v2);
+
+interface Bird {
+  type: 'bird';
+  flyingSpeed: number;
+}
+
+interface Horse {
+  type: 'horse';
+  runningSpeed: number;
+}
+
+type Animal = Bird | Horse;
+
+const movingAnimal = (animal: Animal) => {
+  let speed;
+  switch (animal.type) {
+    case 'bird':
+      speed = animal.flyingSpeed;
+  }
+  switch (animal.type) {
+    case 'horse':
+      speed = animal.runningSpeed;
+  }
+  console.log('Moving at speed:' + speed);
+};
+
+console.log(movingAnimal({ type: 'bird', flyingSpeed: 10 }));

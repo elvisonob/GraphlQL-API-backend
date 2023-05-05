@@ -1,15 +1,48 @@
 "use strict";
-class Person {
-    constructor(n) {
-        this.age = 30;
-        this.name = n;
+const country = {
+    name: 'Beautiful country',
+    precinct: 'Manhanttan',
+    population: '300,000,000',
+    date: new Date(),
+};
+const add = (a, b) => {
+    if (typeof a === 'string' || typeof b === 'string') {
+        return a.toString() + b.toString();
     }
-    greet(phrase) {
-        console.log(phrase);
+};
+class Car {
+    drive() {
+        console.log('Driving a Car');
     }
 }
-let user1;
-user1 = new Person('Elvis');
-user1.name = 'john';
-user1.greet('elvis');
-console.log(user1);
+class Truck {
+    drive() {
+        console.log('Driving a Truck');
+    }
+    loadCargo(amount) {
+        console.log('Loading cargo...' + amount);
+    }
+}
+const v1 = new Car();
+const v2 = new Truck();
+const useVehicle = (vehicle) => {
+    vehicle.drive();
+    if ('loadCargo' in vehicle) {
+        vehicle.loadCargo(1000);
+    }
+};
+useVehicle(v1);
+useVehicle(v2);
+const movingAnimal = (animal) => {
+    let speed;
+    switch (animal.type) {
+        case 'bird':
+            speed = animal.flyingSpeed;
+    }
+    switch (animal.type) {
+        case 'horse':
+            speed = animal.runningSpeed;
+    }
+    console.log('Moving at speed:' + speed);
+};
+console.log(movingAnimal({ type: 'bird', flyingSpeed: 10 }));
