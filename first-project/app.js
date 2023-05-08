@@ -1,48 +1,29 @@
 "use strict";
-const country = {
-    name: 'Beautiful country',
-    precinct: 'Manhanttan',
-    population: '300,000,000',
-    date: new Date(),
+const mergeObjects = (objA, objB) => {
+    return Object.assign(objA, objB);
 };
-const add = (a, b) => {
-    if (typeof a === 'string' || typeof b === 'string') {
-        return a.toString() + b.toString();
+const finalObject = mergeObjects({ name: 'Elvis' }, { age: 32 });
+console.log(finalObject.age);
+const practisingKeyOf = (obj, key) => {
+    return 'value' + obj[key];
+};
+practisingKeyOf({ name: 'elvis' }, 'name');
+class DataStorage {
+    constructor() {
+        this.data = [];
     }
-};
-class Car {
-    drive() {
-        console.log('Driving a Car');
+    addItem(item) {
+        this.data.push(item);
+    }
+    removeItem(item) {
+        this.data.splice(this.data.indexOf(item), 1);
+    }
+    getItems() {
+        return [...this.data];
     }
 }
-class Truck {
-    drive() {
-        console.log('Driving a Truck');
-    }
-    loadCargo(amount) {
-        console.log('Loading cargo...' + amount);
-    }
-}
-const v1 = new Car();
-const v2 = new Truck();
-const useVehicle = (vehicle) => {
-    vehicle.drive();
-    if ('loadCargo' in vehicle) {
-        vehicle.loadCargo(1000);
-    }
-};
-useVehicle(v1);
-useVehicle(v2);
-const movingAnimal = (animal) => {
-    let speed;
-    switch (animal.type) {
-        case 'bird':
-            speed = animal.flyingSpeed;
-    }
-    switch (animal.type) {
-        case 'horse':
-            speed = animal.runningSpeed;
-    }
-    console.log('Moving at speed:' + speed);
-};
-console.log(movingAnimal({ type: 'bird', flyingSpeed: 10 }));
+const textStorage = new DataStorage();
+textStorage.addItem('Elvis');
+textStorage.addItem('Abacha');
+textStorage.removeItem('Elvisssss');
+console.log(textStorage.getItems());

@@ -1,88 +1,39 @@
-type NewYork = {
-  name: string;
-  precinct: string;
+const mergeObjects = <T, U>(objA: T, objB: U) => {
+  return Object.assign(objA, objB);
 };
 
-type Florida = {
-  name: string;
-  population: string;
-  date: Date;
+const finalObject = mergeObjects({ name: 'Elvis' }, { age: 32 });
+
+console.log(finalObject.age);
+
+const practisingKeyOf = <T extends object, U extends keyof T>(
+  obj: T,
+  key: U
+) => {
+  return 'value' + obj[key];
 };
 
-type UnitedStates = NewYork & Florida;
+practisingKeyOf({ name: 'elvis' }, 'name');
 
-const country: UnitedStates = {
-  name: 'Beautiful country',
-  precinct: 'Manhanttan',
-  population: '300,000,000',
-  date: new Date(),
-};
+class DataStorage<T> {
+  private data: T[] = [];
 
-type Combinable = string | number;
-type Combinable2 = number | boolean;
-
-type AllCombinable = Combinable & Combinable2;
-
-const add = (a: Combinable, b: Combinable2) => {
-  if (typeof a === 'string' || typeof b === 'string') {
-    return a.toString() + b.toString();
+  addItem(item: T) {
+    this.data.push(item);
   }
-};
 
-class Car {
-  drive() {
-    console.log('Driving a Car');
+  removeItem(item: T) {
+    this.data.splice(this.data.indexOf(item), 1);
+  }
+
+  getItems() {
+    return [...this.data];
   }
 }
 
-class Truck {
-  drive() {
-    console.log('Driving a Truck');
-  }
+const textStorage = new DataStorage<string>();
 
-  loadCargo(amount: number) {
-    console.log('Loading cargo...' + amount);
-  }
-}
-
-type Vehicle = Car | Truck;
-
-const v1 = new Car();
-const v2 = new Truck();
-
-const useVehicle = (vehicle: Vehicle) => {
-  vehicle.drive();
-  if ('loadCargo' in vehicle) {
-    vehicle.loadCargo(1000);
-  }
-};
-
-useVehicle(v1);
-useVehicle(v2);
-
-interface Bird {
-  type: 'bird';
-  flyingSpeed: number;
-}
-
-interface Horse {
-  type: 'horse';
-  runningSpeed: number;
-}
-
-type Animal = Bird | Horse;
-
-const movingAnimal = (animal: Animal) => {
-  let speed;
-  switch (animal.type) {
-    case 'bird':
-      speed = animal.flyingSpeed;
-  }
-  switch (animal.type) {
-    case 'horse':
-      speed = animal.runningSpeed;
-  }
-  console.log('Moving at speed:' + speed);
-};
-
-console.log(movingAnimal({ type: 'bird', flyingSpeed: 10 }));
+textStorage.addItem('Elvis');
+textStorage.addItem('Abacha');
+textStorage.removeItem('Elvisssss');
+console.log(textStorage.getItems());
